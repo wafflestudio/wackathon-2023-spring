@@ -1,0 +1,6 @@
+@use "./font.scss";
+html,
+body {
+  @include font.pretendard;
+  margin: 0;
+}

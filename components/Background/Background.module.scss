@@ -1,0 +1,120 @@
+@use "./styles/position";
+@use "./styles/color";
+@use "./styles/transition";
+
+.Background {
+  @include position.centered;
+  @include transition.backgroundChange;
+
+  position: fixed;
+  width: 100%;
+  min-height: 100vh;
+
+  .backgroundTransition {
+    @include transition.backgroundChange;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+  .letters {
+    @include position.centered;
+    position: relative;
+    width: 400px;
+    height: 400px;
+    .letter {
+      @include transition.backgroundChange;
+      position: absolute;
+      width: 30%;
+      height: 100%;
+      border-radius: 5px;
+    }
+    .shadow {
+      @include transition.backgroundChange;
+      position: absolute;
+      width: 30%;
+      height: 100%;
+      border-radius: 5px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 6px 6px rgba(0, 0, 0, 0.23);
+    }
+    .letterTransition {
+      @include transition.backgroundChange;
+      position: absolute;
+      width: 30%;
+      height: 100%;
+      border-radius: 5px;
+      opacity: 0;
+    }
+  }
+}
+
+//shape
+@mixin shapeW {
+  .piece1 {
+    transform: translateX(-180px) skew(16deg);
+  }
+  .piece2 {
+    transform: translateX(-60px) skew(-16deg);
+  }
+  .piece3 {
+    transform: translateX(60px) skew(16deg);
+  }
+  .piece4 {
+    transform: translateX(180px) skew(-16deg);
+  }
+}
+@mixin shapeX {
+  .piece1 {
+    transform: translate(100px, 130px) skew(24deg);
+  }
+  .piece2 {
+    transform: translate(100px, -130px) skew(-24deg);
+  }
+  .piece3 {
+    transform: translate(-40px, -130px) skew(24deg);
+  }
+  .piece4 {
+    transform: translate(-40px, 130px) skew(-24deg);
+  }
+}
+
+//themes
+@mixin theme($backgroundColor, $letterColor) {
+  &.Background {
+    background: $backgroundColor;
+  }
+  .letter {
+    background: $letterColor;
+  }
+}
+@mixin transitionTo($backgroundColor, $letterColor) {
+  .backgroundTransition {
+    background: $backgroundColor;
+    opacity: 1;
+  }
+  .letterTransition {
+    background: $letterColor;
+    opacity: 1 !important;
+  }
+}
+
+.loginTheme {
+  @include theme(color.$login-background, color.$login-letter);
+  @include shapeW;
+}
+
+.homeTheme {
+  @include theme(color.$home-background, color.$home-letter);
+  @include shapeX;
+}
+
+.teamsTheme {
+  @include theme(color.$teams-background, color.$teams-letter);
+}
+
+.homeTransition {
+  @include transitionTo(color.$home-background, color.$home-letter);
+  @include shapeX;
+}

@@ -1,4 +1,6 @@
 import { AppProps } from "next/app";
+import "../styles/globals.scss";
+import "../styles/font.scss";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   require("../mocks");
