@@ -4,3 +4,7 @@ body {
   @include font.pretendard;
   margin: 0;
 }
+
+* {
+  box-sizing: border-box;
+}

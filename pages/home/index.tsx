@@ -21,8 +21,9 @@ const Index = () => {
     <main className={cx("Home", { nowTransition: transitionTo })}>
       <Background />
       <section className={cx("introduction")}>
-        <div>2023년 2월 23일에서 25일</div>
+        {/*  <div>2023년 2월 23일에서 25일</div>
         <div>와플스튜디오의 해커톤이 돌아오다</div>
+        */}
       </section>
     </main>
   );
