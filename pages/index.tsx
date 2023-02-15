@@ -5,6 +5,7 @@ import ReactParallaxTilt from "react-parallax-tilt";
 import useTheme from "../store/useTheme";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { postLogin } from "../api/login";
 
 const cx = classNames.bind(styles);
 
@@ -30,11 +31,16 @@ const Main = () => {
           <button
             className={cx("login")}
             onClick={() => {
+              postLogin({ id: "test", password: "right" }).then((res) =>
+                console.log(res),
+              );
+              /*
               setTransition("home");
               setTimeout(() => {
                 setCurrent("home");
                 router.push("/home");
               }, 2000);
+              */
             }}
           >
             로그인
