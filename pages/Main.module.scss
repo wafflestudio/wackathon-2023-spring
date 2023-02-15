@@ -1,6 +1,7 @@
 @use "./styles/position";
 @use "./styles/default";
 @use "./styles/font";
+@use "./styles/color";
 @use "./styles/effect";
 @use "./styles/transition";
 
@@ -9,24 +10,10 @@
   position: relative;
   width: 100%;
   height: 100vh;
-  .timer {
-    @include position.centered;
-    @include font.pretendard;
-    @include transition.backgroundChange;
-    position: absolute;
-    width: 100%;
-    top: 1vw;
-    font-size: 5vw;
-    letter-spacing: -0.3vw;
-    word-spacing: 1vw;
-    color: rgba(255, 255, 255, 0.3);
-    font-weight: 100;
-    font-style: italic;
-  }
+
   .introduction {
     @include position.flexbox(row);
     @include transition.backgroundChange;
-
     width: 80%;
     justify-content: space-between;
     position: relative;
@@ -41,7 +28,6 @@
   .buttons {
     @include position.centered(row);
     @include transition.backgroundChange;
-
     position: absolute;
     width: 100%;
     padding: 10px 0;
@@ -50,16 +36,11 @@
 
     .initialButton {
       @include default.button;
-      @include font.pretendard;
-      @include effect.glassmorphism;
       @include transition.componentChange;
       width: 320px;
       height: 80px;
       border-radius: 16px;
-      color: rgba(255, 255, 255, 0.9);
       font-size: 40px;
-      font-weight: 800;
-      letter-spacing: -0.4px;
       margin: 0 20px;
     }
 
@@ -92,9 +73,6 @@
 }
 
 .nowTransition {
-  .timer {
-    opacity: 0;
-  }
   .introduction {
     opacity: 0;
   }

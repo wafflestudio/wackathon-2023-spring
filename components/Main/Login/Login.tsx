@@ -16,6 +16,9 @@ const Login = () => {
     id: "",
     password: "",
   });
+  const [fetchStatus, setFetchStatus] = useState<
+    "normal" | "fetching" | "success" | "fail"
+  >("normal");
 
   return (
     <form
@@ -30,7 +33,7 @@ const Login = () => {
               router.push("/home");
             }, 2000);
           },
-          (err) => console.log(err),
+          (err) => {},
         );
       }}
     >
@@ -58,7 +61,11 @@ const Login = () => {
           });
         }}
       />
-      <input className={cx("submit")} type="submit" value={"로그인"} />
+      <input
+        className={cx("submit", { fetching: fetchStatus === "fetching" })}
+        type="submit"
+        value={fetchStatus === "fetching" ? "" : "로그인"}
+      />
     </form>
   );
 };

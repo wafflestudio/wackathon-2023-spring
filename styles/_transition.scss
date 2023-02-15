@@ -3,4 +3,5 @@
 }
 @mixin backgroundChange {
   transition: 2s ease;
+  transition-property: opacity, transform;
 }

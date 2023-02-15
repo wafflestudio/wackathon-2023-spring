@@ -2,39 +2,36 @@
 @use "./styles/font";
 @use "./styles/effect";
 @use "./styles/position";
+@use "./styles/pseudo";
 
 .Login {
   @include position.flexbox(row);
-  @include font.pretendard;
+  @include font.pretendardHeading;
   justify-content: center;
   position: relative;
   width: 100%;
   height: 100%;
 
-  color: white;
-  font-size: 24px;
   font-weight: 700;
   letter-spacing: -1px;
+  font-size: 24px;
+  color: white;
 
   .input {
-    @include default.input;
-    @include effect.glassmorphism;
+    @include default.inputText;
     width: 320px;
     height: 60px;
-    border-radius: 16px;
-    padding: 12px;
+    font-size: inherit;
     margin: 0 30px 0 10px;
   }
   .submit {
     @include default.button;
-    @include effect.glassmorphism;
+    @include pseudo.spinner;
+
     width: 80px;
     height: 60px;
-    border-radius: 16px;
     font-size: 20px;
-    transition: 0.1s ease;
-    &:hover {
-      background: rgba(255, 255, 255, 0.5);
+    &.fetching {
     }
   }
 }
