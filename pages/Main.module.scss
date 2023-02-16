@@ -54,6 +54,16 @@
       opacity: 0;
       visibility: hidden;
     }
+    .signupWrapper {
+      @include transition.componentChange;
+      position: absolute;
+      width: 100%;
+      height: 180%;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      visibility: hidden;
+    }
   }
 }
 .initialUI {
@@ -63,6 +73,16 @@
 }
 .loginUI {
   .loginWrapper {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  .initialButton {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+.signupUI {
+  .signupWrapper {
     opacity: 1 !important;
     visibility: visible !important;
   }

@@ -6,6 +6,7 @@ import useTheme from "../store/useTheme";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Login from "../components/Main/Login/Login";
+import Signup from "../components/Main/Signup/Signup";
 
 const cx = classNames.bind(styles);
 
@@ -41,12 +42,21 @@ const Main = () => {
           </button>
         </ReactParallaxTilt>
         <ReactParallaxTilt>
-          <button className={cx("initialButton", "signIn")}>등록하기</button>
+          <button
+            className={cx("initialButton", "signIn")}
+            onClick={() => {
+              setButtonState("signupUI");
+            }}
+          >
+            등록하기
+          </button>
         </ReactParallaxTilt>
         <div className={cx("loginWrapper")}>
           <Login />
         </div>
-        <div className={cx("signupWrapper")}></div>
+        <div className={cx("signupWrapper")}>
+          <Signup />
+        </div>
       </section>
     </main>
   );
