@@ -1,1 +1,7 @@
-export type ThemeName = "login" | "home" | "teams" | "new";
+export type ThemeName =
+  | "login"
+  | "home"
+  | "teams"
+  | "myteam"
+  | "qna"
+  | "people";

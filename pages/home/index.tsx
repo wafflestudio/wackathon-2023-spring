@@ -39,7 +39,16 @@ const Home = () => {
           미완성 팀을 확인하고 원하는 곳에 신청합니다
         </div>
       </button>
-      <button className={cx("mainButton", "leftBottom")}>
+      <button
+        className={cx("mainButton", "leftBottom")}
+        onClick={() => {
+          setTransition("myteam");
+          getAllTeamsFromServer();
+          setTimeout(() => {
+            router.push("/myteam");
+          }, 2000);
+        }}
+      >
         <div className={cx("title")}>팀 생성</div>
         <div className={cx("content")}>
           새로운 팀을 생성하여 해커톤에 참여합니다
