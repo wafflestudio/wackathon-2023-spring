@@ -67,16 +67,16 @@
 }
 @mixin shapeX {
   .piece1 {
-    transform: translate(100px, 130px) skew(24deg);
+    transform: translate(75px, 130px) skew(30deg);
   }
   .piece2 {
-    transform: translate(100px, -130px) skew(-24deg);
+    transform: translate(75px, -130px) skew(-30deg);
   }
   .piece3 {
-    transform: translate(-40px, -130px) skew(24deg);
+    transform: translate(-75px, -130px) skew(30deg);
   }
   .piece4 {
-    transform: translate(-40px, 130px) skew(-24deg);
+    transform: translate(-75px, 130px) skew(-30deg);
   }
 }
 

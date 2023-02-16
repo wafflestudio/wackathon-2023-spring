@@ -10,19 +10,79 @@
   width: 100%;
   height: 100vh;
 
-  .timer {
-    @include position.centered;
-    @include font.pretendard;
-    @include transition.backgroundChange;
+  .mainButton {
+    @include default.button;
+    @include transition.componentChange;
     position: absolute;
-    width: 100%;
-    top: 1vw;
-    font-size: 5vw;
-    letter-spacing: -0.3vw;
-    word-spacing: 1vw;
-    color: rgba(255, 255, 255, 0.3);
-    font-weight: 100;
-    font-style: italic;
+    width: calc(50% - 280px);
+    max-width: 600px;
+    min-width: 450px;
+    height: 300px;
+    background-color: transparent;
+    .title {
+      position: absolute;
+      font-size: 40px;
+    }
+    .content {
+      position: absolute;
+      font-size: 22px;
+      font-weight: 300;
+    }
+    &:hover {
+      transform: scale(1.05);
+    }
+    &.leftTop {
+      bottom: calc(50% + 30px);
+      left: 80px;
+      border-top-right-radius: 360px;
+      .title {
+        left: 20px;
+        bottom: 50px;
+      }
+      .content {
+        left: 20px;
+        bottom: 20px;
+      }
+    }
+    &.leftBottom {
+      top: calc(50% + 30px);
+      left: 80px;
+      border-bottom-right-radius: 360px;
+      .title {
+        left: 20px;
+        top: 20px;
+      }
+      .content {
+        left: 20px;
+        top: 72px;
+      }
+    }
+    &.rightTop {
+      bottom: calc(50% + 30px);
+      right: 80px;
+      border-top-left-radius: 360px;
+      .title {
+        right: 20px;
+        bottom: 50px;
+      }
+      .content {
+        right: 20px;
+        bottom: 20px;
+      }
+    }
+    &.rightBottom {
+      top: calc(50% + 30px);
+      right: 80px;
+      border-bottom-left-radius: 360px;
+      .title {
+        right: 20px;
+        top: 20px;
+      }
+      .content {
+        right: 20px;
+        top: 72px;
+      }
+    }
   }
 
   .introduction {
@@ -41,16 +101,8 @@
     text-align: center;
   }
 
-  .nowTransition {
-    .timer {
-      opacity: 0;
-    }
-
-    .introduction {
-      opacity: 0;
-    }
-
-    .buttons {
+  &.nowTransition {
+    .mainButton {
       opacity: 0;
     }
   }

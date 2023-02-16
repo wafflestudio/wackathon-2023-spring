@@ -10,7 +10,7 @@ type ThemeStore = {
 
 const useTheme = create<ThemeStore>()((set) => ({
   current: "login",
-  transitionTo: null,
+  transitionTo: "login",
   setCurrent: (theme) => set({ current: theme, transitionTo: null }),
   setTransition: (theme) => set({ transitionTo: theme }),
 }));

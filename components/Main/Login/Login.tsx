@@ -29,7 +29,6 @@ const Login = () => {
           (res) => {
             setTransition("home");
             setTimeout(() => {
-              setCurrent("home");
               router.push("/home");
             }, 2000);
           },
