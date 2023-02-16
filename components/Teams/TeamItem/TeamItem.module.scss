@@ -1,0 +1,91 @@
+@use "./styles/position";
+@use "./styles/default";
+@use "./styles/font";
+@use "./styles/effect";
+@use "./styles/transition";
+
+.TeamItem {
+  @include position.flexbox(column);
+  @include default.button;
+  @include transition.componentChange;
+  position: relative;
+  width: 100%;
+  margin-bottom: 16px;
+  list-style: none;
+  font-size: 32px;
+
+  &.open {
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .main {
+    @include position.flexbox(row);
+    width: 100%;
+    min-height: 120px;
+    padding: 20px;
+    .label {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 16px;
+      font-weight: 300;
+    }
+    .amount {
+      position: absolute;
+      left: 75%;
+      font-size: 20px;
+      font-weight: 300;
+      .number {
+        font-size: 36px;
+        font-weight: 800;
+        margin: 0 10px;
+      }
+      .slash {
+        font-size: 36px;
+        margin-left: 10px;
+      }
+    }
+  }
+  .divider {
+    width: 100%;
+    height: 1px;
+    background-color: rgba(white, 0.5);
+    margin: 16px 0;
+  }
+  .more {
+    @include position.flexbox(column);
+    align-items: flex-start;
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    font-size: 28px;
+    cursor: default;
+    .label {
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .resolution {
+      width: 100%;
+      font-size: 28px;
+      font-weight: 100;
+    }
+    .members {
+      width: 100%;
+      .member {
+        @include position.flexbox(row);
+        margin: 4px 0;
+        .username {
+          font-weight: 100;
+        }
+        .id {
+          margin-left: 4px;
+          font-size: 20px;
+          align-self: flex-end;
+        }
+      }
+    }
+  }
+}

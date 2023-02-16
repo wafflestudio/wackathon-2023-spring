@@ -4,12 +4,16 @@ import Background from "../../components/Background/Background";
 import useTheme from "../../store/useTheme";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import useTeams from "../../store/useTeams";
 
 const cx = classNames.bind(styles);
 
-const Index = () => {
+const Home = () => {
   const { transitionTo, setCurrent, setTransition } = useTheme(
     (state) => state,
+  );
+  const getAllTeamsFromServer = useTeams(
+    (state) => state.getAllTeamsFromServer,
   );
   const router = useRouter();
 
@@ -24,6 +28,10 @@ const Index = () => {
         className={cx("mainButton", "leftTop")}
         onClick={() => {
           setTransition("teams");
+          getAllTeamsFromServer();
+          setTimeout(() => {
+            router.push("/teams");
+          }, 2000);
         }}
       >
         <div className={cx("title")}>팀 찾기</div>
@@ -59,4 +67,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Home;

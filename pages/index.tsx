@@ -11,6 +11,7 @@ const cx = classNames.bind(styles);
 
 const Main = () => {
   const { transitionTo, setCurrent } = useTheme((state) => state);
+
   const [buttonState, setButtonState] = useState<
     "initialUI" | "loginUI" | "signupUI"
   >("initialUI");

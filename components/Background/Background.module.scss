@@ -79,6 +79,20 @@
     transform: translate(-75px, 130px) skew(-30deg);
   }
 }
+@mixin shapeAlign {
+  .piece1 {
+    transform: translate(calc(50vw - 300px), 210px) skew(30deg);
+  }
+  .piece2 {
+    transform: translate(calc(50vw - 300px), 70px) skew(30deg);
+  }
+  .piece3 {
+    transform: translate(calc(50vw - 300px), -70px) skew(30deg);
+  }
+  .piece4 {
+    transform: translate(calc(50vw - 300px), -210px) skew(30deg);
+  }
+}
 
 //themes
 @mixin theme($backgroundColor, $letterColor) {
@@ -112,9 +126,14 @@
 
 .teamsTheme {
   @include theme(color.$teams-background, color.$teams-letter);
+  @include shapeAlign;
 }
 
 .homeTransition {
   @include transitionTo(color.$home-background, color.$home-letter);
   @include shapeX;
+}
+.teamsTransition {
+  @include transitionTo(color.$teams-background, color.$teams-letter);
+  @include shapeAlign;
 }
