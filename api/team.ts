@@ -10,7 +10,7 @@ export const getAllTeams = async () => {
     const data = await response.json();
     return data as AllTeamsResponse;
   } catch (e) {
-    console.log(e);
+    throw e;
   }
 };
 

@@ -1,5 +1,5 @@
 import { rest } from "msw";
-import { fakeUsers } from "./fakeDatabase";
+import { fakeTeams, fakeUsers } from "./fakeDatabase";
 import { UserLoginRequest } from "../entities/user/userLogin";
 
 export const handlers = [
@@ -10,5 +10,8 @@ export const handlers = [
     } else {
       return res(ctx.status(403));
     }
+  }),
+  rest.get("/teams", (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json({ teams: fakeTeams }));
   }),
 ];
