@@ -10,6 +10,7 @@ type Props = { team: Team };
 const TeamItem = ({ team }: Props) => {
   const { id, teamName, maximumNumber, resolution, members, applicants } = team;
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [comment, setComment] = useState<string>("");
 
   return (
     <ReactParallaxTilt
@@ -50,7 +51,29 @@ const TeamItem = ({ team }: Props) => {
             </div>
             <div className={cx("divider")} />
             <div className={cx("label")}>지원하기</div>
-            <div className={cx("apply")}></div>
+            <div className={cx("apply")}>
+              <div className={cx("askComment")}>
+                지원하기 전에 자신을 간단하게 소개해주세요!
+              </div>
+              <form
+                className={"applyForm"}
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  alert(id);
+                }}
+              >
+                <input
+                  type="text"
+                  className={cx("commentInput")}
+                  placeholder="한 줄 소개"
+                />
+
+                <input type="submit" className={cx("commentSubmit")} />
+              </form>
+              <div className={cx("current")}>
+                현재 {applicants.length}명이 지원했습니다
+              </div>
+            </div>
           </section>
         )}
       </li>

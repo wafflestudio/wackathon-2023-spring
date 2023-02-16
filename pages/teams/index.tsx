@@ -28,12 +28,37 @@ const Teams = () => {
       <Background />
       <div className={cx("container")}>
         <div className={cx("heading")}>팀 목록</div>
+        <div className={cx("description")}>
+          등록된 모든 팀을 확인하고, 자유롭게 지원하세요!
+        </div>
         <ul className={cx("teamList")}>
-          <ol className={cx("control")}>control</ol>
+          <button
+            className={cx("refresh")}
+            onClick={() => {
+              getAllTeamsFromServer();
+            }}
+          >
+            새로고침
+          </button>
+          {teams.map((team) => (
+            <TeamItem key={team.id} team={team} />
+          ))}{" "}
           {teams.map((team) => (
             <TeamItem key={team.id} team={team} />
           ))}
         </ul>
+        <button
+          className={cx("prevButton")}
+          onClick={() => {
+            setTransition("home");
+            getAllTeamsFromServer();
+            setTimeout(() => {
+              router.push("/home");
+            }, 2000);
+          }}
+        >
+          ← 돌아가기
+        </button>
       </div>
     </main>
   );
