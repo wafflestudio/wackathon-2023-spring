@@ -120,7 +120,7 @@
   .piece4 {
     transform: translate(calc(50vw - 300px), 148px) rotate(-45deg);
   }
-  @media (max-width: 1600px) {
+  @media (max-width: 1600px) and (min-width: 1023px) {
     .letters {
       transform: translateX(calc(1600px * 0.60 - 60vw))
     }
