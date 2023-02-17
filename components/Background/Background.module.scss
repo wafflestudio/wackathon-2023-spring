@@ -120,6 +120,11 @@
   .piece4 {
     transform: translate(calc(50vw - 300px), 148px) rotate(-45deg);
   }
+  @media (max-width: 1600px) {
+    .letters {
+      transform: translateX(calc(1600px * 0.60 - 60vw))
+    }
+  }
 }
 
 //themes
