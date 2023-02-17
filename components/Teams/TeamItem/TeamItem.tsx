@@ -43,7 +43,7 @@ const TeamItem = ({ team, isMine, canApply, full }: Props) => {
       setMembers(res.members);
       setApplications(res.applications);
     });
-  }, []);
+  }, [isOpen]);
 
   return (
     <ReactParallaxTilt
