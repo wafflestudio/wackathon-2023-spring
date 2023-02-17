@@ -79,10 +79,8 @@ const Home = () => {
         </div>
       </button>
       <button className={cx("mainButton", "rightBottom")}>
-        <div className={cx("title")}>참여자 목록</div>
-        <div className={cx("content")}>
-          모든 참여자를 확인하고 내 정보를 수정합니다
-        </div>
+        <div className={cx("title")}>와커톤 주제</div>
+        <div className={cx("content")}>주제는 2월 25일 0시에 공개됩니다</div>
       </button>
 
       <section className={cx("introduction")}>
