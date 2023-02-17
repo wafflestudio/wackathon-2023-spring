@@ -9,6 +9,7 @@
   position: relative;
   width: 100%;
   height: 100vh;
+
   .container {
     @include font.pretendard;
     @include transition.componentChange;
@@ -53,6 +54,8 @@
 }
 
 .nowTransition {
+  overflow-y: hidden;
+
   .container {
     opacity: 0;
     visibility: hidden;
