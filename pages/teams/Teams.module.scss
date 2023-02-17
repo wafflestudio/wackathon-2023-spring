@@ -3,6 +3,7 @@
 @use "./styles/font";
 @use "./styles/effect";
 @use "./styles/transition";
+@use "./styles/responsive";
 
 .Home {
   position: relative;
@@ -57,5 +58,25 @@
       opacity: 0;
       visibility: hidden;
     }
+  }
+}
+
+@include responsive.mobile {
+  .Home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .container {
+    position: relative !important;
+    width: 90% !important;
+    top: auto !important;
+    left: auto !important;
+    min-width: 280px !important;
+  }
+  .prevButton {
+    top: 10px !important;
+    right: 0px !important;
+    font-size: 24px !important;
   }
 }

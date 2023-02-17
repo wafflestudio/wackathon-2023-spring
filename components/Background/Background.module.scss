@@ -1,11 +1,11 @@
 @use "./styles/position";
 @use "./styles/color";
 @use "./styles/transition";
+@use "./styles/responsive";
 
 .Background {
   @include position.centered;
   @include transition.backgroundChange;
-
   position: fixed;
   width: 100%;
   min-height: 100vh;
@@ -181,4 +181,11 @@
 .qnaTransition {
   @include transitionTo(color.$qna-background, color.$qna-letter);
   @include shapeQuestion;
+}
+
+@include responsive.mobile {
+  .Background {
+    width: 100vw;
+    top: 0;
+  }
 }

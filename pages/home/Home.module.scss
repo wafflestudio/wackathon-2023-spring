@@ -3,6 +3,7 @@
 @use "./styles/font";
 @use "./styles/effect";
 @use "./styles/transition";
+@use "./styles/responsive";
 
 .Home {
   @include position.centered;
@@ -19,68 +20,70 @@
     min-width: 450px;
     height: 300px;
     background-color: transparent;
-    .title {
-      position: absolute;
-      font-size: 40px;
-    }
-    .content {
-      position: absolute;
-      font-size: 22px;
-      font-weight: 300;
-    }
-    &:hover {
-      transform: scale(1.05);
-    }
-    &.leftTop {
-      bottom: calc(50% + 30px);
-      left: 80px;
-      border-top-right-radius: 360px;
+    @include responsive.desktop {
       .title {
-        left: 20px;
-        bottom: 50px;
+        position: absolute;
+        font-size: 40px;
       }
       .content {
-        left: 20px;
-        bottom: 20px;
+        position: absolute;
+        font-size: 22px;
+        font-weight: 300;
       }
-    }
-    &.leftBottom {
-      top: calc(50% + 30px);
-      left: 80px;
-      border-bottom-right-radius: 360px;
-      .title {
-        left: 20px;
-        top: 20px;
+      &:hover {
+        transform: scale(1.05);
       }
-      .content {
-        left: 20px;
-        top: 72px;
+      &.leftTop {
+        bottom: calc(50% + 30px);
+        left: 80px;
+        border-top-right-radius: 360px;
+        .title {
+          left: 20px;
+          bottom: 50px;
+        }
+        .content {
+          left: 20px;
+          bottom: 20px;
+        }
       }
-    }
-    &.rightTop {
-      bottom: calc(50% + 30px);
-      right: 80px;
-      border-top-left-radius: 360px;
-      .title {
-        right: 20px;
-        bottom: 50px;
+      &.leftBottom {
+        top: calc(50% + 30px);
+        left: 80px;
+        border-bottom-right-radius: 360px;
+        .title {
+          left: 20px;
+          top: 20px;
+        }
+        .content {
+          left: 20px;
+          top: 72px;
+        }
       }
-      .content {
-        right: 20px;
-        bottom: 20px;
+      &.rightTop {
+        bottom: calc(50% + 30px);
+        right: 80px;
+        border-top-left-radius: 360px;
+        .title {
+          right: 20px;
+          bottom: 50px;
+        }
+        .content {
+          right: 20px;
+          bottom: 20px;
+        }
       }
-    }
-    &.rightBottom {
-      top: calc(50% + 30px);
-      right: 80px;
-      border-bottom-left-radius: 360px;
-      .title {
-        right: 20px;
-        top: 20px;
-      }
-      .content {
-        right: 20px;
-        top: 72px;
+      &.rightBottom {
+        top: calc(50% + 30px);
+        right: 80px;
+        border-bottom-left-radius: 360px;
+        .title {
+          right: 20px;
+          top: 20px;
+        }
+        .content {
+          right: 20px;
+          top: 72px;
+        }
       }
     }
   }
@@ -119,6 +122,28 @@
     .logout {
       opacity: 0;
       visibility: hidden;
+    }
+  }
+}
+
+@include responsive.mobile {
+  .Home {
+    height: auto !important;
+    padding: 60px 0;
+  }
+  .mainButton {
+    position: relative !important;
+    border-radius: 15px;
+    min-width: 300px !important;
+    height: 180px !important;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: rgba(black, 0.5) !important;
+    .title {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+    .content {
     }
   }
 }

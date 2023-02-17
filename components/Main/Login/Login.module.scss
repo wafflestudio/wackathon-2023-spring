@@ -3,6 +3,7 @@
 @use "./styles/effect";
 @use "./styles/position";
 @use "./styles/pseudo";
+@use "./styles/responsive";
 
 .Login {
   @include position.flexbox(row);
@@ -33,5 +34,14 @@
     font-size: 20px;
     &.fetching {
     }
+  }
+}
+
+@include responsive.mobile {
+  .Login {
+    flex-direction: column !important;
+  }
+  .input {
+    margin: 0 !important;
   }
 }

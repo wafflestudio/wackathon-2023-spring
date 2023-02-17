@@ -3,6 +3,7 @@
 @use "./styles/font";
 @use "./styles/effect";
 @use "./styles/transition";
+@use "./styles/responsive";
 
 .QnA {
   position: relative;
@@ -10,6 +11,7 @@
   height: 100vh;
   .container {
     @include font.pretendard;
+    @include transition.componentChange;
     position: relative;
     width: 60%;
     min-width: 880px;
@@ -58,5 +60,14 @@
   .prevButton {
     opacity: 0;
     visibility: hidden;
+  }
+}
+
+@include responsive.mobile {
+  .container {
+    background: rgba(black, 0.5);
+    width: 100% !important;
+    padding: 40px 20px !important;
+    min-width: 300px !important;
   }
 }

@@ -3,6 +3,7 @@
 @use "./styles/effect";
 @use "./styles/position";
 @use "./styles/pseudo";
+@use "./styles/responsive";
 
 .Signup {
   @include position.centered;
@@ -51,5 +52,31 @@
       background-color: white;
       color: #b6712c;
     }
+  }
+}
+
+@include responsive.mobile {
+  .Signup {
+    font-size: 20px;
+    justify-content: flex-start !important;
+    padding: 60px 0;
+
+    .input {
+      margin: 4px !important;
+    }
+  }
+  .row {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  .username {
+    margin: 0 !important;
+  }
+  .positionTag {
+    margin: 5px 0 !important;
+  }
+  .submit {
+    margin: 0 !important;
+    margin-top: 20px !important;
   }
 }

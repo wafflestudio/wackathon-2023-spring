@@ -4,6 +4,7 @@
 @use "./styles/color";
 @use "./styles/effect";
 @use "./styles/transition";
+@use "./styles/responsive";
 
 .Main {
   @include position.centered;
@@ -110,5 +111,34 @@
   }
   .buttons {
     opacity: 0;
+  }
+}
+
+@include responsive.mobile {
+  .Main {
+    display: block !important;
+  }
+  .buttons {
+    position: absolute !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    top: 0 !important;
+  }
+  .introduction {
+    position: relative !important;
+    display: none !important;
+  }
+  .initialButton {
+    width: 100% !important;
+    margin: 20px 0 !important;
+  }
+  .backToMain {
+    position: fixed !important;
+    top: 40px !important;
+    right: 40px !important;
+  }
+  .signupWrapper {
+    height: 100% !important;
   }
 }

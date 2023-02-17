@@ -3,6 +3,7 @@
 @use "./styles/font";
 @use "./styles/effect";
 @use "./styles/transition";
+@use "./styles/responsive";
 
 .MyTeam {
   @include position.flexbox(column);
@@ -198,4 +199,67 @@
   right: 30px;
   font-size: 32px;
   letter-spacing: 0;
+}
+
+@include responsive.mobile {
+  .container {
+    width: 90% !important;
+    margin-top: 40px !important;
+    background-color: rgba(black, 0.3) !important;
+  }
+  .label {
+    display: block !important;
+    position: relative !important;
+    font-size: 24px !important;
+  }
+  .input {
+    width: 100% !important;
+    display: block !important;
+    position: relative !important;
+    margin: 0 !important;
+  }
+  .content {
+    width: 100% !important;
+    display: block !important;
+    position: relative !important;
+    margin: 0 !important;
+  }
+  .numberRange {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+  .teamName {
+    font-size: 24px !important;
+    .input {
+      font-size: 24px !important;
+    }
+  }
+  .prevButton {
+    top: 10px !important;
+    right: 0px !important;
+    font-size: 24px !important;
+  }
+  .manageMember {
+    font-size: 24px !important;
+  }
+  .dismiss {
+    font-size: 22px !important;
+    color: #ffbdbd !important;
+  }
+
+  .new {
+    .content,
+    .manageApplication,
+    .manageMember {
+      display: none !important;
+    }
+  }
+  .manage {
+    .input,
+    .numberRange,
+    .numberShow,
+    .createTeam {
+      display: none !important;
+    }
+  }
 }
