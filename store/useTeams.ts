@@ -14,7 +14,8 @@ const useTeams = create<TeamsStore>()((set) => ({
   getAllTeamsFromServer: () => {
     getTeams().then(
       (res) => {
-        set({ teams: res });
+        const data = res.filter((item) => item.members.length !== 0);
+        set({ teams: data });
       },
       (error) => {
         console.log(error);

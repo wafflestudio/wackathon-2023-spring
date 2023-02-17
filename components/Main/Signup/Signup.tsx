@@ -1,10 +1,13 @@
 import styles from "./Signup.module.scss";
 import { useState } from "react";
 import classNames from "classnames/bind";
-import useTheme from "../../../store/useTheme";
 import { useRouter } from "next/router";
 import { UserSignupRequest } from "../../../entities/user/userSignup";
-import { postManually } from "../../../api/manual";
+import { sendToast } from "../../../store/useToast";
+import { postSignUp } from "../../../api/auth";
+import { setToken } from "../../../api/token";
+import useUser from "../../../store/useUser";
+import { defaultTransition } from "../../transition";
 
 const cx = classNames.bind(styles);
 
@@ -12,8 +15,7 @@ const tags = ["서버", "웹 프론트", "ios", "android", "디자인", "기타"
 
 const Signup = () => {
   const router = useRouter();
-  const setTransition = useTheme((state) => state.setTransition);
-  const setCurrent = useTheme((state) => state.setCurrent);
+  const setUser = useUser((state) => state.setUser);
   const [{ username, password, fullname, positions }, setSignupValue] =
     useState<UserSignupRequest>({
       username: "",
@@ -29,17 +31,36 @@ const Signup = () => {
       className={cx("Signup")}
       onSubmit={(e) => {
         e.preventDefault();
-        postManually<UserSignupRequest>("auth/signup", {
+        if (username.length > 20) {
+          sendToast("ID는 20자까지 가능합니다", "warn");
+          return null;
+        }
+        if (fullname.length > 20) {
+          sendToast("이름은 20자까지 가능합니다", "warn");
+          return null;
+        }
+        if (username.length < 1 || password.length < 1 || fullname.length < 1) {
+          sendToast("모든 정보를 입력해주세요", "warn");
+          return null;
+        }
+
+        if (positions.length < 1) {
+          sendToast("한 개 이상의 분야를 선택하세요", "warn");
+          return null;
+        }
+        postSignUp({
           username,
           password,
           fullname,
           positions,
         }).then(
           (res) => {
-            console.log(res);
+            setToken(res.token);
+            setUser(res.user);
+            defaultTransition(router, "home");
           },
-          (error) => {
-            console.log(error);
+          () => {
+            sendToast("회원가입에 실패했습니다", "warn");
           },
         );
       }}

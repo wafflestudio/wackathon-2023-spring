@@ -1,4 +1,5 @@
 import { UserInfo } from "../user/user";
+import { Application } from "../applications";
 
 export type Team = {
   id: number;
@@ -6,10 +7,5 @@ export type Team = {
   resolution: string;
   maxMembers: number;
   members: UserInfo[];
-  applications: {
-    id: number;
-    team_id: number;
-    user_id: number;
-    comment: string;
-  }[];
+  applications: Application[];
 };

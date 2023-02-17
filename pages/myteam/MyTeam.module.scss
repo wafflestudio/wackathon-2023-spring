@@ -13,12 +13,11 @@
     @include effect.glassmorphism();
     @include font.pretendardHeading;
     @include transition.componentChange;
-
     position: relative;
-
     width: 840px;
     margin-top: 5%;
     padding: 32px 16px;
+    margin-bottom: 5%;
   }
   .label {
     position: absolute;
@@ -79,33 +78,97 @@
     position: relative;
     font-size: 26px;
   }
+  .manageMember {
+    position: relative;
+    margin-top: 14px;
+    padding-top: 10px;
+    font-size: 37px;
+    border-top: 1px solid rgba(white, 0.7);
+    .member {
+      @include position.flexbox(row);
+      position: relative;
+      width: calc(100% - 100px);
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      .fullname {
+        margin-right: 8px;
+      }
+      .username {
+        font-size: 22px;
+        font-weight: 800;
+        margin-right: 8px;
+      }
+      .positions {
+        @include position.flexbox(row);
+        font-size: 18px;
+        .position {
+          @include default.tag;
+          margin-right: 8px;
+        }
+      }
+    }
+
+    .dismiss {
+      @include default.button(#671c1c);
+      font-size: 30px;
+      position: absolute;
+      right: -60px;
+    }
+  }
   .manageApplication {
     position: relative;
     margin-top: 14px;
     padding-top: 10px;
     font-size: 37px;
     border-top: 1px solid rgba(white, 0.7);
+    .application {
+      @include position.flexbox(row);
+      position: relative;
+      width: calc(100% - 100px);
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .fullname {
+      margin-right: 8px;
+    }
+    .username {
+      font-size: 22px;
+      font-weight: 800;
+      margin-right: 8px;
+    }
+    .positions {
+      @include position.flexbox(row);
+      font-size: 18px;
+      .position {
+        @include default.tag;
+        margin-right: 8px;
+      }
+    }
     .comment {
-      font-weight: 700;
+      font-weight: 300;
       font-size: 20px;
+      margin-top: 4px;
     }
     .approve {
       @include default.button(#b5fc4a);
       font-size: 30px;
       position: absolute;
-      right: 100px;
+      top: 20px;
+      right: -60px;
     }
     .dismiss {
       @include default.button(#671c1c);
       font-size: 30px;
       position: absolute;
-      right: 20px;
+      top: 20px;
+      right: -30px;
     }
   }
 }
 .new {
   .content,
-  .manageApplication {
+  .manageApplication,
+  .manageMember {
     display: none;
   }
 }
@@ -120,6 +183,8 @@
 }
 
 .nowTransition {
+  overflow: hidden;
+  pointer-events: none;
   .container {
     opacity: 0;
     visibility: hidden;
@@ -130,7 +195,7 @@
   @include default.textButton(rgba(white, 0.8));
   position: absolute;
   top: 24px;
-  right: 360px;
+  right: 30px;
   font-size: 32px;
   letter-spacing: 0;
 }

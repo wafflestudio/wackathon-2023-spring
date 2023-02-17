@@ -85,6 +85,14 @@
           font-size: 20px;
           align-self: flex-end;
         }
+        .positions {
+          @include position.flexbox(row);
+          font-size: 18px;
+          .position {
+            @include default.tag;
+            margin-left: 5px;
+          }
+        }
       }
     }
     .warning {

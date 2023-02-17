@@ -23,7 +23,7 @@
   padding: 0 20px;
   font-weight: 800;
   transform: translateY(200px);
-  animation: 2.5s reveal ease;
+  animation: 2.5s reveal ease-in-out;
   &.warn {
     @include effect.glassmorphism(#c40d0d);
   }

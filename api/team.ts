@@ -57,17 +57,14 @@ export const getTeam = async (teamId: number): Promise<Team> => {
 };
 
 export const postCreateTeam = async (body: CreateTeamRequest) => {
-  const formData = new FormData();
-  formData.append("name", body.name);
-  formData.append("resolution", body.resolution);
-  formData.append("maxMembers", String(body.maxMembers));
   try {
     const response = await fetch(`${baseURL}teams`, {
       method: "POST",
       headers: {
         Authorization: getToken(),
+        "Content-Type": "application/json",
       },
-      body: formData,
+      body: JSON.stringify(body),
     });
     const data = await response.json();
     if (
@@ -85,9 +82,38 @@ export const postCreateTeam = async (body: CreateTeamRequest) => {
   }
 };
 
-export const postApplyTeam = async (teamId: number) => {
+export const postApplyTeam = async (
+  teamId: number,
+  body: { comment: string },
+) => {
   try {
     const response = await fetch(`${baseURL}teams/${teamId}/apply`, {
+      method: "POST",
+      headers: {
+        Authorization: getToken(),
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    const data = await response.json();
+    if (
+      data.detail === "Not authenticated" ||
+      data.detail === "Invalid authentication credentials"
+    ) {
+      return Promise.reject(authError);
+    }
+    if (data.success) {
+      return Promise.resolve(data);
+    }
+    return Promise.reject(unknownError);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+export const postAcceptApplication = async (teamId: number, userId: number) => {
+  try {
+    const response = await fetch(`${baseURL}teams/${teamId}/accept/${userId}`, {
       method: "POST",
       headers: {
         Authorization: getToken(),
@@ -109,9 +135,9 @@ export const postApplyTeam = async (teamId: number) => {
   }
 };
 
-export const postAcceptApplication = async (teamId: number, userId: number) => {
+export const postLeaveTeam = async (team_id: number) => {
   try {
-    const response = await fetch(`${baseURL}teams/${teamId}/accept/${userId}`, {
+    const response = await fetch(`${baseURL}teams/${team_id}/leave`, {
       method: "POST",
       headers: {
         Authorization: getToken(),

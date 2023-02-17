@@ -26,6 +26,10 @@ const Login = () => {
       className={cx("Login")}
       onSubmit={(e) => {
         e.preventDefault();
+        if (username.length < 1 || password.length < 1) {
+          sendToast("아이디와 비밀번호를 모두 입력해주세요", "warn");
+          return null;
+        }
         postSignIn({ username, password }).then(
           (res) => {
             setToken(res.token);
@@ -33,7 +37,6 @@ const Login = () => {
             defaultTransition(router, "home");
           },
           (error) => {
-            console.log(error);
             sendToast("아이디나 비밀번호를 확인하세요", "warn");
           },
         );

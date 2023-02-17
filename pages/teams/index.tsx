@@ -36,23 +36,37 @@ const Teams = () => {
           등록된 모든 팀을 확인하고, 자유롭게 지원하세요!
         </div>
         <ul className={cx("teamList")}>
-          <button
+          {/* <button
             className={cx("refresh")}
             onClick={() => {
               getAllTeamsFromServer();
-              defaultTransition(router, "teams");
             }}
           >
             새로고침
           </button>
-          {teams.map((team) => (
-            <TeamItem
-              key={team.id}
-              team={team}
-              isMine={user.isSignedIn && user.team_id === team.id}
-              canApply={user.isSignedIn && !user.team_id}
-            />
-          ))}
+          */}
+          {teams
+            .filter((team) => team.members.length !== team.maxMembers)
+            .map((team) => (
+              <TeamItem
+                key={team.id}
+                team={team}
+                isMine={user.isSignedIn && user.team_id === team.id}
+                canApply={user.isSignedIn && !user.team_id}
+                full={false}
+              />
+            ))}
+          {teams
+            .filter((team) => team.members.length === team.maxMembers)
+            .map((team) => (
+              <TeamItem
+                key={team.id}
+                team={team}
+                isMine={user.isSignedIn && user.team_id === team.id}
+                canApply={user.isSignedIn && !user.team_id}
+                full={true}
+              />
+            ))}
         </ul>
         <button
           className={cx("prevButton")}
