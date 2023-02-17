@@ -7,6 +7,7 @@ import { postSignIn } from "../../../api/auth";
 import useUser from "../../../store/useUser";
 import { setToken } from "../../../api/token";
 import { defaultTransition } from "../../transition";
+import { sendToast } from "../../../store/useToast";
 
 const cx = classNames.bind(styles);
 
@@ -33,6 +34,7 @@ const Login = () => {
           },
           (error) => {
             console.log(error);
+            sendToast("아이디나 비밀번호를 확인하세요", "warn");
           },
         );
       }}

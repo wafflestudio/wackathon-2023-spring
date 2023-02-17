@@ -1,0 +1,48 @@
+@use "./styles/effect";
+@use "./styles/position";
+
+.wrapper {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100px;
+  z-index: 999;
+  pointer-events: none;
+  overflow-y: hidden;
+}
+
+.toast {
+  @include position.flexbox(row);
+  @include effect.glassmorphism(black);
+  position: absolute;
+  min-width: 600px;
+  height: 60px;
+  left: 40px;
+  bottom: 20px;
+  font-size: 22px;
+  padding: 0 20px;
+  font-weight: 800;
+  transform: translateY(200px);
+  animation: 2.5s reveal ease;
+  &.warn {
+    @include effect.glassmorphism(#c40d0d);
+  }
+  &.success {
+    @include effect.glassmorphism(#3aee55);
+  }
+}
+
+@keyframes reveal {
+  0% {
+    transform: translateY(200px);
+  }
+  30% {
+    transform: translateY(0%);
+  }
+  70% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(200px);
+  }
+}

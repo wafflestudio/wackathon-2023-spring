@@ -2,7 +2,7 @@ import useTheme from "../store/useTheme";
 import { NextRouter } from "next/router";
 import { ThemeName } from "../entities/theme";
 
-const delay = 2000;
+const delay = 1500;
 
 export const defaultTransition = (
   router: NextRouter,

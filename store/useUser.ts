@@ -1,6 +1,7 @@
 import { UserInfo } from "../entities/user/user";
 import { create } from "zustand";
 import { getMe } from "../api/user";
+import { authError, unknownError } from "../api/errorMessages";
 
 type UserStoreMethods = {
   setUser: (user: UserInfo) => void;
@@ -20,7 +21,10 @@ const useUser = create<UserStore>()((set) => ({
       (res) => {
         set({ ...res, isSignedIn: true });
       },
-      () => {},
+      (error) => {
+        if (error === authError || error === unknownError) {
+        }
+      },
     );
   },
 }));

@@ -5,8 +5,6 @@ import useTheme from "../../store/useTheme";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import useTeams from "../../store/useTeams";
-import { getMe } from "../../api/user";
-import { authError, unknownError } from "../../api/errorMessages";
 import useUser from "../../store/useUser";
 import { defaultTransition } from "../../components/transition";
 import { removeToken } from "../../api/token";
@@ -26,14 +24,7 @@ const Home = () => {
 
   useEffect(() => {
     setCurrent("home");
-    getMe().then(
-      (res) => {
-        user.setUser(res);
-      },
-      (error) => {
-        if (error === authError || error === unknownError) router.push("../");
-      },
-    );
+    user.getMeFromServer();
   }, []);
 
   return (
@@ -75,7 +66,13 @@ const Home = () => {
           </>
         )}
       </button>
-      <button className={cx("mainButton", "rightTop")}>
+      <button
+        className={cx("mainButton", "rightTop")}
+        onClick={() => {
+          setTransition("qna");
+          defaultTransition(router, "qna");
+        }}
+      >
         <div className={cx("title")}>와커톤 설명</div>
         <div className={cx("content")}>
           와커톤은 무엇이고, 어떻게 진행될까요?

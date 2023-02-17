@@ -107,6 +107,20 @@
     transform: translate(calc(50vw - 300px), -210px) skew(-30deg);
   }
 }
+@mixin shapeQuestion {
+  .piece1 {
+    transform: translate(calc(50vw - 300px), -52px) rotate(45deg);
+  }
+  .piece2 {
+    transform: translate(calc(50vw - 300px), -250px) rotate(-45deg);
+  }
+  .piece3 {
+    transform: translate(calc(50vw - 500px), -250px) rotate(45deg);
+  }
+  .piece4 {
+    transform: translate(calc(50vw - 300px), 148px) rotate(-45deg);
+  }
+}
 
 //themes
 @mixin theme($backgroundColor, $letterColor) {
@@ -146,6 +160,10 @@
   @include theme(color.$teams-background, color.$teams-letter);
   @include shapeSide;
 }
+.qnaTheme {
+  @include theme(color.$qna-background, color.$qna-letter);
+  @include shapeQuestion;
+}
 
 .homeTransition {
   @include transitionTo(color.$home-background, color.$home-letter);
@@ -158,4 +176,9 @@
 .myteamTransition {
   @include transitionTo(color.$teams-background, color.$teams-letter);
   @include shapeSide;
+}
+
+.qnaTransition {
+  @include transitionTo(color.$qna-background, color.$qna-letter);
+  @include shapeQuestion;
 }

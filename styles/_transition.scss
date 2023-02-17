@@ -2,6 +2,6 @@
   transition: 0.5s ease-out;
 }
 @mixin backgroundChange {
-  transition: 2s ease;
+  transition: 1.5s ease;
   transition-property: opacity, transform;
 }
