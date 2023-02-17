@@ -33,7 +33,6 @@
     padding: 10px 0;
     bottom: 80px;
     flex-wrap: wrap;
-
     .initialButton {
       @include default.button;
       @include transition.componentChange;
@@ -64,11 +63,24 @@
       opacity: 0;
       visibility: hidden;
     }
+    .backToMain {
+      @include default.textButton;
+      @include transition.componentChange;
+      position: relative;
+      top: -72px;
+      right: -72px;
+      font-size: 24px;
+      font-weight: 100;
+    }
   }
 }
 .initialUI {
   .initialButton {
     opacity: 1 !important;
+  }
+  .backToMain {
+    opacity: 0 !important;
+    visibility: hidden;
   }
 }
 .loginUI {

@@ -67,6 +67,14 @@ const Main = () => {
         <div className={cx("signupWrapper")}>
           <Signup />
         </div>
+        <div
+          className={cx("backToMain")}
+          onClick={() => {
+            setButtonState("initialUI");
+          }}
+        >
+          돌아가기
+        </div>
       </section>
     </main>
   );
