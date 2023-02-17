@@ -51,6 +51,8 @@
   }
 
   &.nowTransition {
+    overflow: hidden;
+    pointer-events: none;
     .container {
       opacity: 0;
       visibility: hidden;

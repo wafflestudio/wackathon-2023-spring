@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import useTeams from "../../store/useTeams";
 import TeamItem from "../../components/Teams/TeamItem/TeamItem";
 import useUser from "../../store/useUser";
+import { defaultTransition } from "../../components/transition";
 
 const cx = classNames.bind(styles);
 
@@ -39,6 +40,7 @@ const Teams = () => {
             className={cx("refresh")}
             onClick={() => {
               getAllTeamsFromServer();
+              defaultTransition(router, "teams");
             }}
           >
             새로고침
@@ -57,9 +59,7 @@ const Teams = () => {
           onClick={() => {
             setTransition("home");
             getAllTeamsFromServer();
-            setTimeout(() => {
-              router.push("/home");
-            }, 2000);
+            defaultTransition(router, "home");
           }}
         >
           ← 돌아가기

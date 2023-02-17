@@ -8,6 +8,7 @@ import useTeams from "../../store/useTeams";
 import { getMe } from "../../api/user";
 import { authError, unknownError } from "../../api/errorMessages";
 import useUser from "../../store/useUser";
+import { defaultTransition } from "../../components/transition";
 
 const cx = classNames.bind(styles);
 
@@ -42,9 +43,7 @@ const Home = () => {
         onClick={() => {
           setTransition("teams");
           getAllTeamsFromServer();
-          setTimeout(() => {
-            router.push("/teams");
-          }, 2000);
+          defaultTransition(router, "teams");
         }}
       >
         <div className={cx("title")}>팀 찾기</div>
