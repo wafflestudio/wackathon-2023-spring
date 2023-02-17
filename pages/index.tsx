@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Login from "../components/Main/Login/Login";
 import Signup from "../components/Main/Signup/Signup";
+import { getHealth } from "../api/health";
 
 const cx = classNames.bind(styles);
 
@@ -20,6 +21,15 @@ const Main = () => {
 
   useEffect(() => {
     setCurrent("login");
+    getHealth().then(
+      (res) => {
+        console.log(res);
+      },
+      (error) => {
+        alert("Warn!");
+        console.log(error);
+      },
+    );
   }, []);
 
   return (

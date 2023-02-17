@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { Team } from "../entities/team/team";
-import { getAllTeams } from "../api/team";
+import { getTeams } from "../api/team";
 
 type TeamsStore = {
   teams: Team[];
@@ -12,9 +12,16 @@ const useTeams = create<TeamsStore>()((set) => ({
   teams: [],
   setTeam: (teams) => set({ teams }),
   getAllTeamsFromServer: () => {
-    getAllTeams().then(({ teams }) => {
-      set({ teams });
-    });
+    getTeams().then(
+      (res) => {
+        set({ teams: res });
+      },
+      (error) => {
+        console.log(error);
+
+        //        console.log(error);
+      },
+    );
   },
 }));
 

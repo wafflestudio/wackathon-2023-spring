@@ -1,10 +1,15 @@
-import { UserInfo, UserWithComment } from "../user/user";
+import { UserInfo } from "../user/user";
 
 export type Team = {
-  id: string;
-  teamName: string;
+  id: number;
+  name: string;
   resolution: string;
-  maximumNumber: number;
+  maxMembers: number;
   members: UserInfo[];
-  applicants: UserWithComment[];
+  applications: {
+    id: number;
+    team_id: number;
+    user_id: number;
+    comment: string;
+  }[];
 };

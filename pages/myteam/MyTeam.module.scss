@@ -27,6 +27,7 @@
   .content {
     margin-left: 120px;
     font-weight: 100;
+    min-height: 20px;
   }
   .input {
     @include default.inputText;
@@ -78,9 +79,33 @@
     position: relative;
     font-size: 26px;
   }
+  .manageApplication {
+    position: relative;
+    margin-top: 14px;
+    padding-top: 10px;
+    font-size: 37px;
+    border-top: 1px solid rgba(white, 0.7);
+    .comment {
+      font-weight: 700;
+      font-size: 20px;
+    }
+    .approve {
+      @include default.button(#b5fc4a);
+      font-size: 30px;
+      position: absolute;
+      right: 100px;
+    }
+    .dismiss {
+      @include default.button(#671c1c);
+      font-size: 30px;
+      position: absolute;
+      right: 20px;
+    }
+  }
 }
 .new {
-  .content {
+  .content,
+  .manageApplication {
     display: none;
   }
 }
@@ -88,7 +113,8 @@
 .manage {
   .input,
   .numberRange,
-  .numberShow {
+  .numberShow,
+  .createTeam {
     display: none;
   }
 }

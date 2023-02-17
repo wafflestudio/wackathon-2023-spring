@@ -5,6 +5,9 @@ import useTheme from "../../store/useTheme";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import useTeams from "../../store/useTeams";
+import { getMe } from "../../api/user";
+import { authError, unknownError } from "../../api/errorMessages";
+import useUser from "../../store/useUser";
 
 const cx = classNames.bind(styles);
 
@@ -15,10 +18,20 @@ const Home = () => {
   const getAllTeamsFromServer = useTeams(
     (state) => state.getAllTeamsFromServer,
   );
+  const user = useUser((state) => state);
+
   const router = useRouter();
 
   useEffect(() => {
     setCurrent("home");
+    getMe().then(
+      (res) => {
+        user.setUser(res);
+      },
+      (error) => {
+        if (error === authError || error === unknownError) router.push("../");
+      },
+    );
   }, []);
 
   return (
@@ -49,10 +62,20 @@ const Home = () => {
           }, 2000);
         }}
       >
-        <div className={cx("title")}>팀 생성</div>
-        <div className={cx("content")}>
-          새로운 팀을 생성하여 해커톤에 참여합니다
-        </div>
+        {user.isSignedIn && user.team_id ? (
+          <>
+            <div className={cx("title")}>팀 관리</div>
+            <div className={cx("content")}>속한 팀을 관리합니다</div>
+          </>
+        ) : (
+          <>
+            {" "}
+            <div className={cx("title")}>팀 생성</div>
+            <div className={cx("content")}>
+              새로운 팀을 생성하여 해커톤에 참여합니다
+            </div>
+          </>
+        )}
       </button>
       <button className={cx("mainButton", "rightTop")}>
         <div className={cx("title")}>와커톤 설명</div>

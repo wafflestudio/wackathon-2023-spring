@@ -4,6 +4,7 @@ import classNames from "classnames/bind";
 import useTheme from "../../../store/useTheme";
 import { useRouter } from "next/router";
 import { UserSignupRequest } from "../../../entities/user/userSignup";
+import { postManually } from "../../../api/manual";
 
 const cx = classNames.bind(styles);
 
@@ -13,22 +14,34 @@ const Signup = () => {
   const router = useRouter();
   const setTransition = useTheme((state) => state.setTransition);
   const setCurrent = useTheme((state) => state.setCurrent);
-  const [{ id, password, username, position }, setSignupValue] =
+  const [{ username, password, fullname, positions }, setSignupValue] =
     useState<UserSignupRequest>({
-      id: "",
-      password: "",
       username: "",
-      position: [],
+      password: "",
+      fullname: "",
+      positions: [],
     });
   const [fetchStatus, setFetchStatus] = useState<
     "normal" | "fetching" | "success" | "fail"
   >("normal");
-
   return (
     <form
       className={cx("Signup")}
       onSubmit={(e) => {
         e.preventDefault();
+        postManually<UserSignupRequest>("auth/signup", {
+          username,
+          password,
+          fullname,
+          positions,
+        }).then(
+          (res) => {
+            console.log(res);
+          },
+          (error) => {
+            console.log(error);
+          },
+        );
       }}
     >
       <div className={cx("row", "first")}>
@@ -36,13 +49,13 @@ const Signup = () => {
         <input
           className={cx("input", "id")}
           type="text"
-          value={id}
+          value={username}
           onChange={(e) => {
             setSignupValue({
-              id: e.target.value,
+              username: e.target.value,
               password,
-              username,
-              position,
+              fullname,
+              positions,
             });
           }}
         />
@@ -53,10 +66,10 @@ const Signup = () => {
           value={password}
           onChange={(e) => {
             setSignupValue({
-              id,
-              password: e.target.value,
               username,
-              position,
+              password: e.target.value,
+              fullname,
+              positions,
             });
           }}
         />
@@ -66,13 +79,13 @@ const Signup = () => {
         <input
           className={cx("input", "username")}
           type="text"
-          value={username}
+          value={fullname}
           onChange={(e) => {
             setSignupValue({
-              id,
+              username,
               password,
-              username: e.target.value,
-              position,
+              fullname: e.target.value,
+              positions,
             });
           }}
         />
@@ -81,22 +94,24 @@ const Signup = () => {
           <div
             key={tagName}
             className={cx("positionTag", {
-              selected: position.includes(tagName),
+              selected: positions.includes(tagName),
             })}
             onClick={() => {
-              if (position.includes(tagName)) {
+              if (positions.includes(tagName)) {
                 setSignupValue({
-                  id,
-                  password,
                   username,
-                  position: position.filter((position) => position !== tagName),
+                  password,
+                  fullname,
+                  positions: positions.filter(
+                    (positions) => positions !== tagName,
+                  ),
                 });
               } else {
                 setSignupValue({
-                  id,
-                  password,
                   username,
-                  position: [...position, tagName],
+                  password,
+                  fullname,
+                  positions: [...positions, tagName],
                 });
               }
             }}

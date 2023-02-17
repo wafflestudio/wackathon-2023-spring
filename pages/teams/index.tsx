@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import useTeams from "../../store/useTeams";
 import TeamItem from "../../components/Teams/TeamItem/TeamItem";
+import useUser from "../../store/useUser";
 
 const cx = classNames.bind(styles);
 
@@ -14,13 +15,15 @@ const Teams = () => {
     (state) => state,
   );
   const { teams, getAllTeamsFromServer } = useTeams((state) => state);
+  const user = useUser((state) => state);
   const router = useRouter();
 
   useEffect(() => {
     setCurrent("teams");
-    setTimeout(() => {
-      getAllTeamsFromServer();
-    }, 2000);
+    if (!user.isSignedIn) {
+      user.getMeFromServer();
+    }
+    getAllTeamsFromServer();
   }, []);
 
   return (
@@ -41,10 +44,12 @@ const Teams = () => {
             새로고침
           </button>
           {teams.map((team) => (
-            <TeamItem key={team.id} team={team} />
-          ))}{" "}
-          {teams.map((team) => (
-            <TeamItem key={team.id} team={team} />
+            <TeamItem
+              key={team.id}
+              team={team}
+              isMine={user.isSignedIn && user.team_id === team.id}
+              canApply={user.isSignedIn && !user.team_id}
+            />
           ))}
         </ul>
         <button

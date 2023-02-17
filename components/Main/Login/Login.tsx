@@ -2,37 +2,38 @@ import styles from "./Login.module.scss";
 import { useState } from "react";
 import { UserLoginRequest } from "../../../entities/user/userLogin";
 import classNames from "classnames/bind";
-import { postLogin } from "../../../api/login";
-import useTheme from "../../../store/useTheme";
 import { useRouter } from "next/router";
+import { postSignIn } from "../../../api/auth";
+import useUser from "../../../store/useUser";
+import { setToken } from "../../../api/token";
+import { defaultTransition } from "../../transition";
 
 const cx = classNames.bind(styles);
 
 const Login = () => {
   const router = useRouter();
-  const setTransition = useTheme((state) => state.setTransition);
-  const setCurrent = useTheme((state) => state.setCurrent);
-  const [{ id, password }, setLoginValue] = useState<UserLoginRequest>({
-    id: "",
+  const [{ username, password }, setLoginValue] = useState<UserLoginRequest>({
+    username: "",
     password: "",
   });
   const [fetchStatus, setFetchStatus] = useState<
     "normal" | "fetching" | "success" | "fail"
   >("normal");
-
+  const setUser = useUser((state) => state.setUser);
   return (
     <form
       className={cx("Login")}
       onSubmit={(e) => {
         e.preventDefault();
-        postLogin({ id, password }).then(
+        postSignIn({ username, password }).then(
           (res) => {
-            setTransition("home");
-            setTimeout(() => {
-              router.push("/home");
-            }, 2000);
+            setToken(res.token);
+            setUser(res.user);
+            defaultTransition(router, "home");
           },
-          (err) => {},
+          (error) => {
+            console.log(error);
+          },
         );
       }}
     >
@@ -40,10 +41,10 @@ const Login = () => {
       <input
         className={cx("input", "id")}
         type="text"
-        value={id}
+        value={username}
         onChange={(e) => {
           setLoginValue({
-            id: e.target.value,
+            username: e.target.value,
             password,
           });
         }}
@@ -55,7 +56,7 @@ const Login = () => {
         value={password}
         onChange={(e) => {
           setLoginValue({
-            id,
+            username,
             password: e.target.value,
           });
         }}
