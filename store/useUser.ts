@@ -14,7 +14,7 @@ type UserStore = ((UserInfo & { isSignedIn: true }) | { isSignedIn: false }) &
 const useUser = create<UserStore>()((set) => ({
   isSignedIn: false,
   setUser: (user) => set({ ...user, isSignedIn: true }),
-  resetUser: () => set({ isSignedIn: false }, true),
+  resetUser: () => set({ isSignedIn: false }),
   getMeFromServer: () => {
     getMe().then(
       (res) => {

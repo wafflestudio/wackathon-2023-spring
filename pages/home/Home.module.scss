@@ -100,7 +100,14 @@
     color: rgba(white, 0.8);
     text-align: center;
   }
-
+  .logout {
+    @include default.button;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    padding: 4px 8px;
+  }
   &.nowTransition {
     pointer-events: none;
     overflow: hidden;

@@ -9,6 +9,7 @@ import { getMe } from "../../api/user";
 import { authError, unknownError } from "../../api/errorMessages";
 import useUser from "../../store/useUser";
 import { defaultTransition } from "../../components/transition";
+import { removeToken } from "../../api/token";
 
 const cx = classNames.bind(styles);
 
@@ -56,9 +57,7 @@ const Home = () => {
         onClick={() => {
           setTransition("myteam");
           getAllTeamsFromServer();
-          setTimeout(() => {
-            router.push("/myteam");
-          }, 2000);
+          defaultTransition(router, "myteam");
         }}
       >
         {user.isSignedIn && user.team_id ? (
@@ -94,6 +93,16 @@ const Home = () => {
         <div>와플스튜디오의 해커톤이 돌아오다</div>
         */}
       </section>
+      <button
+        className={cx("logout")}
+        onClick={() => {
+          user.resetUser();
+          removeToken();
+          location.href = "../";
+        }}
+      >
+        로그아웃
+      </button>
     </main>
   );
 };
