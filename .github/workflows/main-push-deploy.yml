@@ -6,35 +6,27 @@ on:
       - main
 
 jobs:
-  build:
+  deploy:
     name: Build and Export
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: setup yarn
-        uses: DerYeger/yarn-setup-action@master
+      - name: Set up Node.js
+        uses: actions/setup-node@master
         with:
-          node-version: 16
+          node-version: 16.x
 
-      - name: Yarn install
+      - name: Yarn Install
         run: yarn install
 
-      - name: Yarn make
+      - name: Yarn Make (build and deploy)
         run: yarn make
-
-  deploy:
-    name: Deploy
-    needs: build
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
-          aws-region: us-northeast-2
 
       - name: Sync to S3 Bucket (Deploy)
         run: aws s3 sync ./out ${{ secrets.S3_BUCKET_URL }}
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: 'ap-northeast-2'
