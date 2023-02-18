@@ -46,7 +46,6 @@ const Teams = () => {
           </button>
           */}
           {teams
-            .filter((team) => team.id > 27)
             .filter((team) => team.members.length !== team.maxMembers)
             .map((team) => (
               <TeamItem
@@ -58,7 +57,6 @@ const Teams = () => {
               />
             ))}
           {teams
-            .filter((team) => team.id > 27)
             .filter((team) => team.members.length === team.maxMembers)
             .map((team) => (
               <TeamItem
