@@ -21,7 +21,7 @@ jobs:
       - name: Yarn Install
         run: yarn install
 
-      - name: Yarn Make (build and deploy)
+      - name: Yarn Make (build and export)
         run: yarn make
 
       - name: Sync to S3 Bucket (Deploy)
