@@ -8,6 +8,7 @@ import useTeams from "../../store/useTeams";
 import useUser from "../../store/useUser";
 import { defaultTransition } from "../../components/transition";
 import { removeToken } from "../../api/token";
+import useUsers from "../../store/useUsers";
 
 const cx = classNames.bind(styles);
 
@@ -18,6 +19,9 @@ const Home = () => {
   const getAllTeamsFromServer = useTeams(
     (state) => state.getAllTeamsFromServer,
   );
+  const getAllUsersFromServer = useUsers(
+      (state) => state.getAllUsersFromServer
+  )
   const user = useUser((state) => state);
 
   const router = useRouter();
@@ -35,6 +39,7 @@ const Home = () => {
         onClick={() => {
           setTransition("teams");
           getAllTeamsFromServer();
+          getAllUsersFromServer();
           defaultTransition(router, "teams");
         }}
       >
@@ -48,6 +53,7 @@ const Home = () => {
         onClick={() => {
           setTransition("myteam");
           getAllTeamsFromServer();
+          getAllUsersFromServer();
           defaultTransition(router, "myteam");
         }}
       >

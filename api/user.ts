@@ -22,3 +22,28 @@ export const getMe = async () => {
     return Promise.reject(e);
   }
 };
+
+export const getUsers = async () => {
+  try {
+    const response = await fetch(`${baseURL}users`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: getToken(),
+      },
+    });
+    const data = await response.json();
+    if (
+        data.detail === "Not authenticated" ||
+        data.detail === "Invalid authentication credentials"
+    ) {
+      return Promise.reject(authError);
+    }
+    if (Array.isArray(data)) {
+      return Promise.resolve(data);
+    }
+    return Promise.reject(unknownError);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};

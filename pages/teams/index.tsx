@@ -5,6 +5,7 @@ import useTheme from "../../store/useTheme";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import useTeams from "../../store/useTeams";
+import useUsers from "../../store/useUsers";
 import TeamItem from "../../components/Teams/TeamItem/TeamItem";
 import useUser from "../../store/useUser";
 import { defaultTransition } from "../../components/transition";
@@ -16,6 +17,7 @@ const Teams = () => {
     (state) => state,
   );
   const { teams, getAllTeamsFromServer } = useTeams((state) => state);
+  const { users, getAllUsersFromServer } = useUsers((state) => state);
   const user = useUser((state) => state);
   const router = useRouter();
 
@@ -25,6 +27,7 @@ const Teams = () => {
       user.getMeFromServer();
     }
     getAllTeamsFromServer();
+    getAllUsersFromServer();
   }, []);
 
   return (
@@ -45,6 +48,20 @@ const Teams = () => {
             새로고침
           </button>
           */}
+          <TeamItem
+              key={0}
+              team={{
+                id: 0,
+                name: "자유 참가",
+                maxMembers: 99,
+                resolution: "이 팀은 어떤 팀에도 속하지 않은 분들로 이루어져 있습니다. 와커톤 참가 신청이 끝날 때까지 무소속인 분들은 자동으로 배정될 예정입니다.",
+                members: [],
+                applications: []
+              }}
+              isMine={false}
+              canApply={false}
+              full={false}
+          />
           {teams
             .filter((team) => team.members.length !== team.maxMembers)
             .map((team) => (
@@ -73,6 +90,7 @@ const Teams = () => {
           onClick={() => {
             setTransition("home");
             getAllTeamsFromServer();
+            getAllUsersFromServer();
             defaultTransition(router, "home");
           }}
         >

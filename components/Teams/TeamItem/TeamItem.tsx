@@ -9,6 +9,8 @@ import useTeams from "../../../store/useTeams";
 import { UserInfo } from "../../../entities/user/user";
 import useUser from "../../../store/useUser";
 import { Application } from "../../../entities/applications";
+import {getUsers} from "../../../api/user";
+import useUsers from "../../../store/useUsers";
 
 const cx = classNames.bind(styles);
 
@@ -38,11 +40,22 @@ const TeamItem = ({ team, isMine, canApply, full }: Props) => {
   const getAllTeamsFromServer = useTeams(
     (state) => state.getAllTeamsFromServer,
   );
+  const getAllUsersFromServer = useUsers(
+      (state) => state.getAllUsersFromServer,
+  );
   useEffect(() => {
-    getTeam(id).then((res) => {
-      setMembers(res.members);
-      setApplications(res.applications);
-    });
+    if (id === 0) {
+      getUsers().then((res) => {
+        setMembers(res.filter((x) => x.id > 7 && x.team_id === null));
+        setApplications([]);
+      })
+    }
+    else {
+      getTeam(id).then((res) => {
+        setMembers(res.members);
+        setApplications(res.applications);
+      });
+    }
   }, [isOpen]);
 
   return (
@@ -97,7 +110,7 @@ const TeamItem = ({ team, isMine, canApply, full }: Props) => {
             )}
             {!isMine && !canApply && (
               <div className={cx("warning")}>
-                다른 팀에 속해 있어 지원할 수 없습니다
+                {(id === 0) ? "이 팀은 무소속일 경우 자동 배정되는 팀입니다." : "다른 팀에 속해 있어 지원할 수 없습니다"}
               </div>
             )}
             {!isMine &&
@@ -130,6 +143,7 @@ const TeamItem = ({ team, isMine, canApply, full }: Props) => {
                           if (res.success) {
                             sendToast("지원이 완료되었습니다", "success");
                             getAllTeamsFromServer();
+                            getAllUsersFromServer();
                             setIsOpen(false);
                           }
                         },
